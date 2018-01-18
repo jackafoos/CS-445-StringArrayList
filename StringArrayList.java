@@ -5,13 +5,31 @@ public class StringArrayList implements StringList{
   private String[] array;
 
   public StringArrayList(){
-    array = new String[1];
-    size = 0;
-    capacity = array.length;
+    array = new String[1];//main array implementation
+    size = 0;//number of elements in the array
+    capacity = array.length;//numer of items that can be held in the array
   }
 
+  /*Adds a string s to the array,
+   *resizes array by 2 times if needed using ensureCapacity();
+   */
   public int add(String s){
-    return 0;
+    ensureCapacity();//Assume this makes space for new elements if needed
+    array[size] = s;
+    size++;
+    return size - 1;
+  }
+
+  /*checks to make sure the capacity is greater than the size,
+   *if not, doubles the size of the array
+   */
+  private void ensureCapacity(){
+    if (size == capacity){
+      String[] tempArry = new String[capacity * 2];
+      System.arraycopy(array, 0, tempArry, 0, size);
+      array = tempArry;
+      capacity = array.length;
+    }
   }
 
   public String get(int i){
