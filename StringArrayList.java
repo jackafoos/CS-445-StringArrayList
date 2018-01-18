@@ -31,9 +31,10 @@ public class StringArrayList implements StringList{
       capacity = array.length;
     }
   }
-
+  //returns value at the given index
+  //NEEDS TO BE COMPLETED FOR INDEX OUT OF BOUNDS!!!!!!!!!!!!!!!
   public String get(int i){
-    return "";
+    return array[i]
   }
 
   public boolean contains(String s){
@@ -45,7 +46,7 @@ public class StringArrayList implements StringList{
   }
 
   public int size(){
-    return 0;
+    return size;
   }
 
   public int add(int index, String s){
