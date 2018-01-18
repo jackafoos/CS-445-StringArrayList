@@ -34,15 +34,28 @@ public class StringArrayList implements StringList{
   //returns value at the given index
   //NEEDS TO BE COMPLETED FOR INDEX OUT OF BOUNDS!!!!!!!!!!!!!!!
   public String get(int i){
-    return array[i]
+    return array[i];
   }
-
+  /*returns true if array contains the given string s
+   *returns false otherwise
+   */
   public boolean contains(String s){
-    return true;
+    for (String temp : array){
+      if (temp.equals(s));
+        return true;
+    }
+    return false;
   }
 
   public int indexOf(String s){
-    return 0;
+    long index = 0;
+    for (String temp : array){
+      if (temp.equals(s))
+        return index;
+      else
+        index ++
+    }
+    return -1;
   }
 
   public int size(){
