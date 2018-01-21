@@ -102,7 +102,12 @@ public class StringArrayList implements StringList{
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //with try catch
   public void set(int index, String s){
-    array[index] = s;
+    if (size < capacity && size < index){
+      throw new IndexOutOfBoundsException();
+    }
+    else{
+      array[index] = s;
+    }
   }
   //creates a copy of array that is the right size
   public String[] toArray(){
