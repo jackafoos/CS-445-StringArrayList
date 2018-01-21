@@ -25,14 +25,13 @@ public class StringArrayList implements StringList{
    */
   private void ensureCapacity(){
     if (size == capacity){
-      String[] tempArry = new String[capacity * 2];
+      String[] tempArry = new String[capacity  * 2];
       System.arraycopy(array, 0, tempArry, 0, size);
       array = tempArry;
       capacity = array.length;
     }
   }
   //returns value at the given index
-  //NEEDS TO BE COMPLETED FOR INDEX OUT OF BOUNDS!!!!!!!!!!!!!!!
   public String get(int i){
     return array[i];
   }
@@ -40,44 +39,75 @@ public class StringArrayList implements StringList{
    *returns false otherwise
    */
   public boolean contains(String s){
-    for (String temp : array){
-      if (temp.equals(s));
-        return true;
-    }
-    return false;
+    return indexOf(s) != -1;
   }
-
+  /*returns the index of the requested string,
+   *returns -1 if the array is not an element of arraycopy
+   */
   public int indexOf(String s){
-    long index = 0;
+    int index = 0;
     for (String temp : array){
       if (temp.equals(s))
         return index;
       else
-        index ++
+        index ++;
     }
     return -1;
   }
-
+//returns the number of elements in array
   public int size(){
     return size;
   }
 
   public int add(int index, String s){
-    return 0;
+    ensureCapacity();
+    for (int a = size; a > index; a--){
+      array[a] = array[a - 1];
+    }
+    array[index] = s;
+    size++;
+    return index;
   }
-
-  public void clear(){}
-
+  /*sets array to an empty array
+   *sets capacity to the length of new array
+   *sets size back to 0
+   */
+  public void clear(){
+    array = new String[1];
+    size  = 0;
+    capacity = array.length;
+  }
+  /*returns false if the loop finds at least one entry that is not null.
+   *otherwise returns assertTrue
+   */
   public boolean isEmpty(){
-    return true;
+    if (size == 0)
+      return true;
+    else
+      return false;
   }
-
+  /*removes string at the specified index from the array
+   *shifts all objects to compensate
+   */
   public String remove(int i){
-    return "";
+    String s = array[i];
+    for (int a = i; a < size - 1; a++){
+      array[a] = array[a + 1];
+    }
+    size--;
+    array[size] = null;
+    return s;
   }
-  public void set(int index, String s){}
-
+  //Throw index out of Bounds exception if size < length, and size < index!!!!!!
+  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  //with try catch
+  public void set(int index, String s){
+    array[index] = s;
+  }
+  //creates a copy of array that is the right size
   public String[] toArray(){
-    return new String[1];
+    String[] tempArray = new String[size];
+    System.arraycopy(array, 0, tempArray, 0, size);
+    return tempArray;
   }
 }
