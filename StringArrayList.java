@@ -25,22 +25,25 @@ public class StringArrayList implements StringList{
    */
   private void ensureCapacity(){
     if (size == capacity){
-      String[] tempArry = new String[capacity  * 2];
+      String[] tempArry = new String[capacity * 2];
       System.arraycopy(array, 0, tempArry, 0, size);
       array = tempArry;
       capacity = array.length;
     }
   }
+
   //returns value at the given index
   public String get(int i){
     return array[i];
   }
+
   /*returns true if array contains the given string s
    *returns false otherwise
    */
   public boolean contains(String s){
     return indexOf(s) != -1;
   }
+
   /*returns the index of the requested string,
    *returns -1 if the array is not an element of arraycopy
    */
@@ -54,11 +57,15 @@ public class StringArrayList implements StringList{
     }
     return -1;
   }
+
 //returns the number of elements in array
   public int size(){
     return size;
   }
 
+  /*Adds a string to the array at the given index
+   *shifts the array to make room
+   */
   public int add(int index, String s){
     ensureCapacity();
     for (int a = size; a > index; a--){
@@ -68,6 +75,7 @@ public class StringArrayList implements StringList{
     size++;
     return index;
   }
+
   /*sets array to an empty array
    *sets capacity to the length of new array
    *sets size back to 0
@@ -77,15 +85,15 @@ public class StringArrayList implements StringList{
     size  = 0;
     capacity = array.length;
   }
-  /*returns false if the loop finds at least one entry that is not null.
-   *otherwise returns assertTrue
-   */
+
+  // if the size is zero, then the array is empty: return true, otherwise, false
   public boolean isEmpty(){
     if (size == 0)
       return true;
     else
       return false;
   }
+
   /*removes string at the specified index from the array
    *shifts all objects to compensate
    */
@@ -98,18 +106,22 @@ public class StringArrayList implements StringList{
     array[size] = null;
     return s;
   }
-  //Throw index out of Bounds exception if size < length, and size < index!!!!!!
-  //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  //with try catch
+
+  /*sets the string at index to s
+   *if the number of elements in the array is less than the index given, then it
+    * will throw an index out of bounds error so that it doesn't increment the
+    * size of the array.
+   */
   public void set(int index, String s){
-    if (size < capacity && size < index){
+    if (size < index){
       throw new IndexOutOfBoundsException();
     }
     else{
       array[index] = s;
     }
   }
-  //creates a copy of array that is the right size
+
+  //creates a copy of array for user use outside of this class
   public String[] toArray(){
     String[] tempArray = new String[size];
     System.arraycopy(array, 0, tempArray, 0, size);
